@@ -10,8 +10,6 @@ export const Todos = ({todos, setTodos}) => {
 
         setTodos([...todos])
 
-        console.log(todos)
-
         localStorage.setItem('todos', JSON.stringify([...todos]))
     }
 
