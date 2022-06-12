@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { v4 } from "uuid";
 
-export const Form = ({setTodos}) => {
+export const Form = ({setTodos, todos}) => {
     const inputRef = useRef(null);
     const handleMakeTodo = evt => {
         evt.preventDefault();
@@ -13,6 +13,7 @@ export const Form = ({setTodos}) => {
         }
         
         setTodos(prev => [newTodo, ...prev])
+        localStorage.setItem('todos', JSON.stringify([newTodo, ...todos]))
         inputRef.current.value = null;
     }
 

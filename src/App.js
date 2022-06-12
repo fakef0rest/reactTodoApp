@@ -3,11 +3,12 @@ import { Form, Todos } from './components';
 
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const localTodos = localStorage.getItem('todos')
+  const [todos, setTodos] = useState(localTodos ? JSON.parse(localTodos) : []);
   return (
     <>
       <h1>Todo app</h1>
-      <Form setTodos={setTodos}/>
+      <Form setTodos={setTodos} todos={todos}/>
       <Todos todos={todos} setTodos={setTodos} />
     </>
   );

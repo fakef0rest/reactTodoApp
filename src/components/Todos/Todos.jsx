@@ -9,12 +9,18 @@ export const Todos = ({todos, setTodos}) => {
         todo.text = editedTodo
 
         setTodos([...todos])
+
+        console.log(todos)
+
+        localStorage.setItem('todos', JSON.stringify([...todos]))
     }
 
     const handleDeleteTodo = (todoId) => {
         const deletedTodos = todos.filter(todo => todo.id !== todoId)
 
-        setTodos([...deletedTodos]);
+        setTodos(deletedTodos);
+
+        localStorage.setItem('todos', JSON.stringify(deletedTodos))
     }
 
     const handleCheckTodo = (evt, todoId) => {
@@ -29,7 +35,7 @@ export const Todos = ({todos, setTodos}) => {
         })
         setTodos(filteredTodos);
 
-
+        localStorage.setItem('todos', JSON.stringify(filteredTodos))
     }
     return (
         <>
@@ -37,7 +43,7 @@ export const Todos = ({todos, setTodos}) => {
                 {todos.map(todo => (
                     <li key={todo.id}>
 
-                        <input type="checkbox" onChange={evt => handleCheckTodo(evt, todo.id)}/>
+                        <input type="checkbox" checked={todo.isCompleted} onChange={evt => handleCheckTodo(evt, todo.id)}/>
                         <p ref={pRef} className={todo.isCompleted ? 'lineThrough' : null}>{todo.text}</p>
                         <button onClick={() => handleEditTodo(todo)}>Edit</button>    
                         <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>    
